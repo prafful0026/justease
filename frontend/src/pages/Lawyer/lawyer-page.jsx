@@ -1,9 +1,17 @@
+import React, { useState,useEffect } from "react";
 import {Link} from 'react-router-dom'
 import { Row,Col,Image,ListGroup,Card,Button } from "react-bootstrap";
 import Rating from "../../components/Rating/rating-component";
-import lawyers from '../../lawyers'
+import Axios from 'axios'
 const Lawyer = ({match}) => {
-    const lawyer=lawyers.find(p=>p._id===match.params.id)
+    const[lawyer,setLawyer]=useState({})
+    useEffect(()=>{
+        const fetchLawyer=async ()=>{
+            const {data}=await Axios.get(`/api/lawyers/${match.params.id}`)
+            setLawyer(data); 
+        }
+        fetchLawyer()
+    },[match]) //to avoid the dependency warning message
     return (
          <>
          <Link className='btn btn-dark my-3' to='/' >GO BACK</Link> 

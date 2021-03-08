@@ -56,4 +56,4 @@ const lawyers = [
   }
 ]
 
-module.exports=lawyers
+export default lawyers

@@ -1,6 +1,4 @@
 import React from "react";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 const Header = () => {
