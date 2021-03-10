@@ -6,6 +6,8 @@ const router=express.Router()
 
 router.get('/',asyncHandler(async (req,res)=>{
   const lawyers=await Lawyer.find({})
+//   res.status(401)
+//   throw new Error('yoyio')
   res.json(lawyers)
 }))
 router.get('/:id',asyncHandler(async (req,res)=>{

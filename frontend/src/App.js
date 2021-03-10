@@ -7,7 +7,7 @@ import Login from "./pages/login/login-page.jsx"
 import Footer from "./components/Footer/footer-component.jsx"
 import {Container} from 'react-bootstrap'
 import LawyersPage from './pages/Lawyers/lawyers-page.jsx'
-import Lawyer from './pages/Lawyer/lawyer-page.jsx'
+import LawyerPage from './pages/Lawyer/lawyer-page.jsx'
 import HomePage from './pages/Home/home-page.jsx'
 class App extends React.Component {
   state={message:""}
@@ -20,7 +20,7 @@ class App extends React.Component {
         <Container>
           <Route path='/' component={HomePage} exact/>
           <Route path='/lawyers' component={LawyersPage} exact/>
-          <Route path='/lawyers/:id' component={Lawyer} exact/>
+          <Route path='/lawyers/:id' component={LawyerPage} exact/>
         </Container>
       </main>
       <Footer />
