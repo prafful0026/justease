@@ -14,7 +14,7 @@ const Lawyer = ({match}) => {
     },[match]) //to avoid the dependency warning message
     return (
          <>
-         <Link className='btn btn-dark my-3' to='/' >GO BACK</Link> 
+         <Link className='btn btn-dark my-3' to='/lawyers' >GO BACK</Link> 
          <Row>
              <Col md={6}>
                  <Image src={lawyer.image} alt={lawyer.name} fluid/>  

@@ -4,11 +4,11 @@ import Rating from '../Rating/rating-component.jsx'
 const Lawyer = ({ lawyer }) => {
   return (
     <Card className="my-3 p-3 rounded">
-      <a href={`/lawyer/${lawyer._id}`}>
+      <a href={`/lawyers/${lawyer._id}`}>
         <Card.Img src={lawyer.image} variant="top" />
       </a>
       <Card.Body>
-        <a href={`/lawyer/${lawyer._id}`}>
+        <a href={`/lawyers/${lawyer._id}`}>
           <Card.Title as="div">
             <strong>{lawyer.name}</strong>
           </Card.Title>
