@@ -8,14 +8,16 @@ import Loader from "../../components/Loader/Loader";
 import Message from '../../components/Message/Message.jsx'
 
 
-const LawyerPage = ({ match }) => {
+const LawyerPage = ({ history, match }) => {
   const dispatch = useDispatch();
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const { loading, error, lawyer } = lawyerDetails;
   useEffect(() => {
     dispatch(listLawyerDetails(match.params.id));
   }, [dispatch, match]); //to avoid the dependency warning message
-  
+  const bookAppointmentHandler=()=>{
+     history.push(`/appoint/${match.params.id}?${lawyer.isAvailable}`)
+  }
   return (
     <>
       <Link className="btn btn-dark my-3" to="/lawyers">
@@ -61,6 +63,7 @@ const LawyerPage = ({ match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
+                    onClick={bookAppointmentHandler}
                     className="btn-block"
                     type="button "
                     disabled={!lawyer.isAvailable}

@@ -9,6 +9,7 @@ import {Container} from 'react-bootstrap'
 import LawyersPage from './pages/Lawyers/lawyers-page.jsx'
 import LawyerPage from './pages/Lawyer/lawyer-page.jsx'
 import HomePage from './pages/Home/home-page.jsx'
+import AppointPage from './pages/AppointPage/appoint-page.jsx'
 class App extends React.Component {
   state={message:""}
   render(){
@@ -21,6 +22,7 @@ class App extends React.Component {
           <Route path='/' component={HomePage} exact/>
           <Route path='/lawyers' component={LawyersPage} exact/>
           <Route path='/lawyers/:id' component={LawyerPage} exact/>
+          <Route path='/appoint/:id' component={AppointPage} exact/>
         </Container>
       </main>
       <Footer />
