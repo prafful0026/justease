@@ -30,6 +30,7 @@ const caseSchema = mongoose.Schema(
   }
 );
 
+
 const Case = mongoose.model("Case", caseSchema);
 
 export default Case;
