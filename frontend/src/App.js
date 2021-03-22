@@ -11,6 +11,7 @@ import LawyerPage from './pages/Lawyer/lawyer-page.jsx'
 import HomePage from './pages/Home/home-page.jsx'
 import AppointPage from './pages/AppointPage/appoint-page.jsx'
 import UserRegisterPage from "./pages/UserRegister/user-register-page.jsx";
+import UserProfilePage from './pages/UserProfile/user-profile-page.jsx'
 class App extends React.Component {
   state={message:""}
   render(){
@@ -26,6 +27,8 @@ class App extends React.Component {
           <Route path='/lawyers' component={LawyersPage} exact/>
           <Route path='/lawyers/:id' component={LawyerPage} exact/>
           <Route path='/appoint/:id' component={AppointPage} exact/>
+          <Route path='/profile' component={UserProfilePage} exact/>
+
         </Container>
       </main>
       <Footer />

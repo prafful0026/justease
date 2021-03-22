@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,10 +7,16 @@ import { logout } from "../../actions/userActions.js";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [name,setName]=useState("")
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  useEffect(()=>{
+  if(userInfo)
+  setName(userInfo.name)   
+  },[setName,userInfo])
   const logoutHandler = () => {
-    dispatch(logout()) 
+    dispatch(logout())
+    // console.log(userInfo)
   };
   return (
     <header>
@@ -29,8 +36,8 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown className="px-4" title={userInfo.name}>
-                  <LinkContainer to="/profile" >
+                <NavDropdown className="px-4" title={name}>
+                  <LinkContainer to="profile" >
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
