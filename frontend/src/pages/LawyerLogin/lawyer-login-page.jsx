@@ -6,13 +6,13 @@ import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx"
 import FormContainer from "../../components/FormContainer/FormContainer.jsx";
 import { login } from "../../actions/userActions.js";
-const UserLoginPage = ({location,history}) => {
+const LawyerLoginPage = ({location,history}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch()
-  const userLogin=useSelector(state=>state.userLogin)
-  const {loading,error,userInfo}=userLogin
+  const lawyerLogin=useSelector(state=>state.userLogin)
+  const {loading,error,userInfo}=lawyerLogin
    
   const redirect=location.search?location.search.split('=')[1]:'/'
   
@@ -26,7 +26,7 @@ const UserLoginPage = ({location,history}) => {
 
   const submitHandler= (e)=>{
       e.preventDefault()
-      const userType='user'
+      const userType='lawyer'
       dispatch(login(email,password,userType))
   }
   return (
@@ -60,9 +60,9 @@ const UserLoginPage = ({location,history}) => {
       </Form>
       <Row className="py-3">
         <Col>
-          New User?{" "}
+          New lawyer?{" "}
           <Link
-            to={redirect ? `/userRegister?redirect=${redirect}` : "/userRegister"}>
+            to={redirect ? `/lawyerRegister?redirect=${redirect}` : "/lawyerRegister"}>
             {" "}Register
           </Link>
         </Col>
@@ -71,5 +71,5 @@ const UserLoginPage = ({location,history}) => {
   );
 };
 
-export default UserLoginPage;
+export default LawyerLoginPage;
  

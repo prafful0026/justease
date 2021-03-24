@@ -16,7 +16,7 @@ const LawyerPage = ({ history, match }) => {
     dispatch(listLawyerDetails(match.params.id));
   }, [dispatch, match]); //to avoid the dependency warning message
   const bookAppointmentHandler=()=>{
-     history.push(`/appoint/${match.params.id}?${lawyer.isAvailable}`)
+     history.push(`/appoint/${match.params.id}`)
   }
   return (
     <>

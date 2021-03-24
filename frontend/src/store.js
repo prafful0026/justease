@@ -25,6 +25,7 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };
+
 const middleware = [thunk];
 const store = createStore(
   reducer,

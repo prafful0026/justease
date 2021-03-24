@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const reviewSchema = mongoose.Schema(
   {
@@ -25,7 +26,6 @@ const lawyerSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     liscenceID: {
       type: String,
@@ -56,11 +56,28 @@ const lawyerSchema = mongoose.Schema(
       required: true,
       default: true,
     },
+    userType: {
+      type: String,
+      required: true
+    },
   },
   {
     timestamps: true,
   }
 );
+
+lawyerSchema.methods.matchPassword  = async function(enteredPassword){
+  return await bcrypt.compare(enteredPassword,this.password)
+}
+
+lawyerSchema.pre('save',async function (next){
+  if(!this.isModified('password')){
+    next()
+  }
+  const salt=await bcrypt.genSalt(10)
+  this.password=await bcrypt.hash(this.password,salt)
+})
+
 
 const Lawyer = mongoose.model("Lawyer", lawyerSchema);
 

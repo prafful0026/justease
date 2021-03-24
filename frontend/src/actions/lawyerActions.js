@@ -7,6 +7,7 @@ import {
   LAWYER_LIST_SUCCESS,
 } from "../constants/lawyerConstants.js";
 import Axios from "axios";
+
 export const listLawyers = () => async (dispatch) => {
   try {
     dispatch({ type: LAWYER_LIST_REQUEST });
@@ -43,3 +44,4 @@ export const listLawyerDetails = (id) => async (dispatch) => {
     });
   }
 };
+

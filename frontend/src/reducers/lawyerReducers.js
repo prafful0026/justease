@@ -31,5 +31,4 @@ export const lawyerDetailsReducer = (state = { lawyer: {reviews:[]} }, action) =
       return state;
   }
 };
-
 // export default lawyerListReducer;

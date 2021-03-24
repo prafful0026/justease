@@ -12,13 +12,14 @@ const Header = () => {
   const { userInfo } = userLogin;
   useEffect(()=>{
   if(userInfo)
-  setName(userInfo.name)   
+  setName(userInfo.name)
   },[setName,userInfo])
   const logoutHandler = () => {
     dispatch(logout())
     // console.log(userInfo)
   };
   return (
+    
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
@@ -35,7 +36,7 @@ const Header = () => {
                   <i className="fas fa-bookmark"></i>lawyers
                 </Nav.Link>
               </LinkContainer>
-              {userInfo ? (
+              {userInfo? (
                 <NavDropdown className="px-4" title={name}>
                   <LinkContainer to="profile" >
                     <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -45,11 +46,14 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/userLogin" className="px-4">
-                  <Nav.Link>
-                    <i className="fas fa-user"></i>SIGN IN
-                  </Nav.Link>
-                </LinkContainer>
+                <NavDropdown className="px-4" title="LOGIN/SIGNUP">
+                 <LinkContainer to="/userLogin" >
+                    <NavDropdown.Item>USER</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/lawyerLogin" >
+                    <NavDropdown.Item>LAWYER</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

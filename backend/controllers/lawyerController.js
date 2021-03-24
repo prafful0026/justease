@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Lawyer from "../models/lawyerModel.js";
+import generateToken from "../utils/generateToken.js";
 
 const getLawyers = asyncHandler(async (req, res) => {
   const lawyers = await Lawyer.find({});
@@ -16,5 +17,8 @@ const getLawyerById = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+
+
 
 export { getLawyerById, getLawyers };

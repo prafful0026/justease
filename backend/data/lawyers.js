@@ -12,10 +12,12 @@ const lawyers = [
     numReviews: 12,
     password:bcrypt.hashSync('1234',10),
     liscenceID:123,
-    isAvailable:true
+    isAvailable:true,
+    userType:'lawyer',
   },
   {
     name: 'jesse pinkman',
+    userType:'lawyer',
     email:'abc@jhi2j',
     image: '/images/jesse.jpg',
     description:
@@ -31,6 +33,7 @@ const lawyers = [
   {
     name: 'heinsberg chacha',
     email:'abc@j4hij',
+    userType:'lawyer',
     image: '/images/takla.jpg',
     description:
       'chemistry gooood nwi qidefwejr r34irud4nrn 4ru34n r840drt843yrtn4hfbcrrfh frycner',
@@ -44,6 +47,7 @@ const lawyers = [
   {
     name: 'kate parker',
     email:'abc@5jhij',
+    userType:'lawyer',
     image: '/images/kate.jpg',
     description:
       'feminist party full summport',
@@ -57,6 +61,7 @@ const lawyers = [
   {
     name: 'katygrfg parker',
     email:'abc@6jhij',
+    userType:'lawyer',
     image: '/images/mouse.jpg',
     description:
       'feminist party full summport',
