@@ -18,7 +18,26 @@ const getLawyerById = asyncHandler(async (req, res) => {
   }
 });
 
+const getLawyerProfile=asyncHandler(async (req, res) => {
+  const lawyer=await Lawyer.findById(req.lawyer._id)
+
+  if(lawyer)
+{
+  res.json({
+    _id: lawyer._id,
+    name: lawyer.name,
+    email: lawyer.email,
+    userType: lawyer.userType,
+    image: lawyer.image,
+    liscenceID: lawyer.liscenceID,
+    category: lawyer.category,
+    description: lawyer.description,
+  });
+}
+
+
+});
 
 
 
-export { getLawyerById, getLawyers };
+export { getLawyerById, getLawyers,getLawyerProfile };

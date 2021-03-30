@@ -29,4 +29,13 @@ const protect =asyncHandler( async (req,res,next)=>{
    
 }
 )
-export {protect}
+const admin=(req,res,next)=>{
+    if(req.user&&req.user.userType=="admin")
+    next()
+    else
+    {
+        res.status(401)
+        throw new Error('not admin')
+    }
+}
+export {protect,admin}

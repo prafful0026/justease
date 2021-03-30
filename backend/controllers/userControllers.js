@@ -3,6 +3,11 @@ import User from "../models/userModel.js";
 import Lawyer from "../models/lawyerModel.js";
 import generateToken from "../utils/generateToken.js";
 
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
 const authUser = asyncHandler(async (req, res) => {
   const { email, password, userType } = req.body;
   if (userType == "user") {
@@ -142,4 +147,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfile };
+export { authUser, getUserProfile, registerUser, updateUserProfile ,getUsers};

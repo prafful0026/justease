@@ -3,6 +3,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
+
+import { USER_UPDATE_PROFILE_RESET } from '../../constants/userConstants'
 import {
   getUserDetails,
   updateUserProfile,
@@ -26,20 +28,18 @@ const UserProfilePage = ({ location, history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
   useEffect(() => {
-    setErrorMessage(error);
     if (!userInfo) {
-      console.log(userInfo);
-      history.push("/userLogin");
+      history.push('/login')
     } else {
-      if (!user.name) {
-        dispatch(getUserDetails("profile"));
+      if (!user || !user.name ||success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
+        dispatch(getUserDetails('profile'))
       } else {
-        setName(user.name);
-        setEmail(user.email);
+        setName(user.name)
+        setEmail(user.email)
       }
     }
-  }, [dispatch, history, userInfo, user, error]);
-
+  }, [dispatch, history, userInfo, user, success])
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {

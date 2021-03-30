@@ -6,7 +6,6 @@ import Loader from "../../components/Loader/Loader.jsx";
 import FormContainer from "../../components/FormContainer/FormContainer.jsx";
 import { listLawyerDetails } from "../../actions/lawyerActions.js";
 const AppointPage = ({ location, history, match }) => {
-  
   const [desc, setDesc] = useState("");
   const [evidence, setEvidence] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -14,17 +13,13 @@ const AppointPage = ({ location, history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
-  const lawyerDetails = useSelector((state) => state.lawyerDetails)
-  const Lawyer = lawyerDetails;
+  const lawyerDetails = useSelector((state) => state.lawyerDetails);
+  const {lawyer} = lawyerDetails;
 
   useEffect(() => {
     dispatch(listLawyerDetails(match.params.id));
     if (!userInfo) history.push("/userLogin");
-    else if (!Lawyer.lawyer) setErrorMessage("LAWYER NOT FOUND!!");
-    else if (Lawyer.lawyer && !Lawyer.lawyer.isAvailable)
-      setErrorMessage("LAWYER NOT AVAILABLE!!");
-  }, [dispatch, match, Lawyer.lawyer, history, userInfo]);
-
+  }, [dispatch, match, history, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,6 +27,12 @@ const AppointPage = ({ location, history, match }) => {
   return (
     <FormContainer>
       <h1>appoint</h1>
+      {/* {!lawyer
+        ? setErrorMessage("LAWYER NOT FOUND!!")
+        : setErrorMessage("")}
+      {lawyer && !lawyer.isAvailable
+        ? setErrorMessage("LAWYER NOT AVAILABLE!!")
+        : setErrorMessage("")} */}
       {error && <Message variant="danger">{error}</Message>}
       {errorMessage && <Message variant="danger">{errorMessage}</Message>}
       {loading && <Loader></Loader>}
@@ -40,7 +41,7 @@ const AppointPage = ({ location, history, match }) => {
           <Form.Label>CASE DESC</Form.Label>
           <Form.Control
             type="text"
-            disabled={!Lawyer.lawyer || !Lawyer.lawyer.isAvailable}
+            disabled={!lawyer || !lawyer.isAvailable}
             placeholder="Enter Description"
             value={desc}
             onChange={(e) => {
@@ -53,7 +54,7 @@ const AppointPage = ({ location, history, match }) => {
         <Form.Group controlId="evidence">
           <Form.Label>EVIDENCE</Form.Label>
           <Form.Control
-            disabled={!Lawyer.lawyer || !Lawyer.lawyer.isAvailable}
+            disabled={!lawyer || !lawyer.isAvailable}
             type="text"
             placeholder="Enter Evidence"
             value={evidence}
@@ -65,7 +66,7 @@ const AppointPage = ({ location, history, match }) => {
         </Form.Group>
 
         <Button
-          disabled={!Lawyer.lawyer || !Lawyer.lawyer.isAvailable}
+          disabled={!lawyer || !lawyer.isAvailable}
           type="submit"
           variant="primary"
         >
