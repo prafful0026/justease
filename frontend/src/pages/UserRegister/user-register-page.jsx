@@ -35,7 +35,11 @@ const UserRegisterPage = ({location,history}) => {
       }
 
       else
-      dispatch(register(name,email,password))
+      {
+      const userType='user'
+      dispatch(register(name,email,password,userType))
+
+      }
   }
   
   return (
