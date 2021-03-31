@@ -13,6 +13,7 @@ const lawyers = [
     password:bcrypt.hashSync('1234',10),
     liscenceID:123,
     isAvailable:true,
+    isVerified:true,
     userType:'lawyer',
   },
   {
@@ -27,6 +28,7 @@ const lawyers = [
     numReviews: 8,
     password:bcrypt.hashSync('1234',10),
     liscenceID:1234,
+    isVerified:true,
     isAvailable:true
 
   },
@@ -42,6 +44,7 @@ const lawyers = [
     numReviews: 12,
     password:bcrypt.hashSync('1234',10),
     liscenceID:12344,
+    isVerified:true,
     isAvailable:true
   },
   {
@@ -56,6 +59,7 @@ const lawyers = [
     numReviews: 12,
     password:bcrypt.hashSync('1234',10),
     liscenceID:12345,
+    isVerified:true,
     isAvailable:true
   },
   {
@@ -70,6 +74,7 @@ const lawyers = [
     numReviews: 12,
     password:bcrypt.hashSync('1234',10),
     liscenceID:12347,
+    isVerified:false,
     isAvailable:false
   }
 ]

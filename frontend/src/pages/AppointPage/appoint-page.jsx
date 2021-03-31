@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
@@ -15,11 +15,17 @@ const AppointPage = ({ location, history, match }) => {
 
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const {lawyer} = lawyerDetails;
-
+  
   useEffect(() => {
-    dispatch(listLawyerDetails(match.params.id));
-    if (!userInfo) history.push("/userLogin");
-  }, [dispatch, match, history, userInfo]);
+    if(!userInfo)
+    history.push('/userLogin')
+    dispatch(listLawyerDetails(match.params.id));    
+    if(lawyer.name&&!lawyer.isAvailable)
+    setErrorMessage("LAWYER NOT AVAILABLE!!")
+    else if(lawyer._id===1)
+    setErrorMessage("LAWYER NOT FOUND!!")
+
+  }, [dispatch, match, history,lawyer._id]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -27,12 +33,6 @@ const AppointPage = ({ location, history, match }) => {
   return (
     <FormContainer>
       <h1>appoint</h1>
-      {/* {!lawyer
-        ? setErrorMessage("LAWYER NOT FOUND!!")
-        : setErrorMessage("")}
-      {lawyer && !lawyer.isAvailable
-        ? setErrorMessage("LAWYER NOT AVAILABLE!!")
-        : setErrorMessage("")} */}
       {error && <Message variant="danger">{error}</Message>}
       {errorMessage && <Message variant="danger">{errorMessage}</Message>}
       {loading && <Loader></Loader>}

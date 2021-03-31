@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,24 @@ import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import { listLawyers } from "../../actions/lawyerActions";
 
-const LawyerList = () => {
+const LawyerList = ({history}) => {
     const dispatch = useDispatch();
     const lawyerList = useSelector((state) => state.lawyerList);
     const { loading, error, lawyers } = lawyerList;
+    
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+  
     useEffect(() => {
-      dispatch(listLawyers());
-    }, [dispatch]);
+      if(userInfo&&userInfo.userType==="admin")
+      {
+        dispatch(listLawyers());
+      }
+      else
+      {
+          history.push('/userLogin')
+      }
+    }, [dispatch,history]);
     const deleteHandler=()=>{
         console.log('delete')
     }

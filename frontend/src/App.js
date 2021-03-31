@@ -1,6 +1,5 @@
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Axios from "axios"
+import { BrowserRouter, Route } from 'react-router-dom';
 import React from "react"
 import Header from "./components/Header/header-component.jsx"
 import UserLoginPage from "./pages/UserLogin/user-login-page.jsx"

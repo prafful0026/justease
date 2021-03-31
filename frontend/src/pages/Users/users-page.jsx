@@ -5,13 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import { listUsers } from "../../actions/userActions";
-const UserListPage = () => {
+const UserListPage = ({history}) => {
   const dispatch = useDispatch();
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
-    dispatch(listUsers());
-  }, [dispatch]);
+    if(userInfo&&userInfo.userType==="admin")
+    {
+      dispatch(listUsers());
+    }
+    else
+    {
+        history.push('/userLogin')
+    }
+  }, [dispatch,history]);
+
   const deleteHandler=()=>{
       console.log('delete')
   }

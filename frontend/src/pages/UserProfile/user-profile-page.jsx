@@ -29,9 +29,9 @@ const UserProfilePage = ({ location, history }) => {
   const { success } = userUpdateProfile;
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login')
+      history.push('/userLogin')
     } else {
-      if (!user || !user.name ||success) {
+      if (!user.name) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
       } else {
@@ -39,7 +39,7 @@ const UserProfilePage = ({ location, history }) => {
         setEmail(user.email)
       }
     }
-  }, [dispatch, history, userInfo, user, success])
+  }, [dispatch, history, userInfo, user])
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {

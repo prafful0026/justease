@@ -56,6 +56,11 @@ const lawyerSchema = mongoose.Schema(
       required: true,
       default: true,
     },
+    isVerified:{
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     userType: {
       type: String,
       required: true

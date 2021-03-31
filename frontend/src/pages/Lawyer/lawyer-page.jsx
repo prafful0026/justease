@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../../components/Rating/rating-component";
@@ -12,9 +12,11 @@ const LawyerPage = ({ history, match }) => {
   const dispatch = useDispatch();
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const { loading, error, lawyer } = lawyerDetails;
-  useEffect(() => {
-    dispatch(listLawyerDetails(match.params.id));
-  }, [dispatch, match]); //to avoid the dependency warning message
+  useEffect( () => {
+     dispatch(listLawyerDetails(match.params.id));
+    if(lawyer.isVerified===false)
+    history.push("/lawyers")
+  }, [dispatch, match,lawyer._id,history]); //to avoid the dependency warning message
   const bookAppointmentHandler=()=>{
      history.push(`/appoint/${match.params.id}`)
   }

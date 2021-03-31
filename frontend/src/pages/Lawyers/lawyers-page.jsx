@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 // import lawyers from '../../lawyers'
 import { Row, Col } from "react-bootstrap";
 import Lawyer from "../../components/Lawyer/lawyer-component";
@@ -24,9 +24,7 @@ const LawyersPage = () => {
       ) : (
         <Row>
           {lawyers.map((lawyer) => (
-            <Col key={lawyer._id} sm={12} md={6} lg={4} xl={3}>
-              <Lawyer key={lawyer._id} lawyer={lawyer} />
-            </Col>
+            lawyer.isVerified?(<Col key={lawyer._id} sm={12} md={6} lg={4} xl={3}><Lawyer key={lawyer._id} lawyer={lawyer} /></Col>):("")
           ))}
         </Row>
       )}

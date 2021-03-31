@@ -17,6 +17,7 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_LIST_RESET
 } from "../constants/userConstants.js";
 
 export const login = (email, password , userType) => async (dispatch) => {
@@ -30,7 +31,7 @@ export const login = (email, password , userType) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "api/users/login",
+      "/api/users/login",
       { email, password ,userType},
       config
     );
@@ -54,6 +55,8 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: USER_LIST_RESET });
+
 };
 
 export const register = ( name, email, password,userType, liscenceID,category,description,image) => async (dispatch) => {
@@ -67,7 +70,7 @@ export const register = ( name, email, password,userType, liscenceID,category,de
       },
     };
     const { data } = await axios.post(
-      "api/users",
+      "/api/users",
       {  name, email, password,userType, liscenceID,category,description,image},
       config
     );
