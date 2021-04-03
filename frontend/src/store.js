@@ -10,7 +10,8 @@ import {
   userLoginReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
-  userListReducer
+  userListReducer,
+  userDeleteReducer
 } from "./reducers/userReducers.js";
 const reducer = combineReducers({
   lawyerList: lawyerListReducer,
@@ -19,7 +20,9 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile:userUpdateProfileReducer,
-  userList:userListReducer
+  userList:userListReducer,
+  userDelete:userDeleteReducer,
+  
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

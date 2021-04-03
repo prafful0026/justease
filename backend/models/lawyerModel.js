@@ -26,6 +26,7 @@ const lawyerSchema = mongoose.Schema(
     },
     image: {
       type: String,
+      required: true,
     },
     liscenceID: {
       type: String,

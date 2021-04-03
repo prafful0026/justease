@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import connectDB from './config/db.js'
 import lawyerRoutes from './routes/lawyerRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
+import path from "path";
 import { notFound,errorHandler } from './middlewares/errorMiddleware.js'
 dotenv.config()
 connectDB()
@@ -11,8 +13,16 @@ app.use(express.json())
 app.get('/',(req,res)=>{
         res.send("yo")
 })
-app.use('/api/lawyers',lawyerRoutes)
+// app.get('/api/upload/',(req,res)=>{
+//         res.send("yo")
+// })
+app.use('/api/lawyers/',lawyerRoutes)
 app.use('/api/users/',userRoutes)
+app.use('/api/upload/',uploadRoutes)
+
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use(notFound)
 app.use(errorHandler)
