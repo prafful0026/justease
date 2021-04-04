@@ -19,14 +19,14 @@ export const lawyerListReducer = (state = { lawyers: [] }, action) => {
       return state;
   }
 };
-export const lawyerDetailsReducer = (state = { lawyer: {reviews:[],isAvailable:true} }, action) => {
+export const lawyerDetailsReducer = (state = { lawyer: {reviews:[]} }, action) => {
   switch (action.type) {
     case LAWYER_DETAILS_REQUEST:
       return { loading: true, ...state };
     case LAWYER_DETAILS_SUCCESS:
       return { loading: false, lawyer: action.payload };
     case LAWYER_DETAILS_FAIL:
-      return { loading: false, error: action.payload ,lawyer:{_id:1}};
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

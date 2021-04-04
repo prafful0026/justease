@@ -12,11 +12,22 @@ const LawyerPage = ({ history, match }) => {
   const dispatch = useDispatch();
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const { loading, error, lawyer } = lawyerDetails;
+  const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+  // console.log(lawyer)
   useEffect( () => {
-     dispatch(listLawyerDetails(match.params.id));
+    if(!userInfo||userInfo.userType==="user")
+    {
+      if (!lawyer._id || lawyer._id !== match.params.id) {
+        dispatch(listLawyerDetails(match.params.id))
+      }
+    }
+    else
+    history.push('/')
+    //  dispatch(listLawyerDetails(match.params.id));
     if(lawyer.isVerified===false)
     history.push("/lawyers")
-  }, [dispatch, match,lawyer._id,history]); //to avoid the dependency warning message
+  }, [dispatch, match,lawyer.isVerified]); //to avoid the dependency warning message
   const bookAppointmentHandler=()=>{
      history.push(`/appoint/${match.params.id}`)
   }

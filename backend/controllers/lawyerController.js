@@ -8,7 +8,7 @@ const getLawyers = asyncHandler(async (req, res) => {
 });
 
 const getLawyerById = asyncHandler(async (req, res) => {
-  const lawyer = await Lawyer.findById(req.params.id);
+  const lawyer = await Lawyer.findOne({_id:req.params.id});
 
   if (lawyer) {
     res.json(lawyer);

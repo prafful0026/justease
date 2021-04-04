@@ -29,7 +29,13 @@ export const listLawyers = () => async (dispatch) => {
 export const listLawyerDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: LAWYER_DETAILS_REQUEST });
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
     const { data } = await Axios.get(`/api/lawyers/${id}`);
+    // console.log(data)
     dispatch({
       type: LAWYER_DETAILS_SUCCESS,
       payload: data,

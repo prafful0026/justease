@@ -6,13 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from '../../components/Message/Message.jsx'
 import Loader from '../../components/Loader/Loader.jsx'
 import { listLawyers } from "../../actions/lawyerActions.js";
-const LawyersPage = () => {
+const LawyersPage = ({history}) => {
   const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const lawyerList = useSelector((state) => state.lawyerList);
   const { loading, error, lawyers } = lawyerList;
   useEffect(() => {
+    if(userInfo && (userInfo.userType==="lawyer"||userInfo.userType==="admin"))
+    history.push('/')
     dispatch(listLawyers());
-  }, [dispatch]);
+  }, [dispatch,history,userInfo]);
   // const lawyers=[]
   return (
     <>

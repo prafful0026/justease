@@ -23,7 +23,7 @@ const LawyerList = ({history}) => {
       {
           history.push('/userLogin')
       }
-    }, [dispatch,history]);
+    }, [dispatch,history,userInfo]);
     const deleteHandler=()=>{
         console.log('delete')
     }

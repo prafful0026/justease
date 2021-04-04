@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
@@ -48,7 +47,7 @@ const UserListPage = ({history}) => {
               <th>NAME</th>
               <th>EMAIL</th>
               <th>ADMIN</th>
-              <th></th>
+              <th>DELETE USER</th>
             </tr>
             </thead>
             <tbody>
@@ -67,11 +66,6 @@ const UserListPage = ({history}) => {
                     )}
                   </td>
                   <td>
-                      <LinkContainer to={`/user/${user._id}/edit`}>
-                          <Button variant='light' className='btn-sm'>
-                              <i className='fas fa-edit'></i>
-                          </Button>
-                      </LinkContainer>
                       <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(user._id)}><i className='fas fa-trash'></i></Button>
                   </td>
                 </tr>

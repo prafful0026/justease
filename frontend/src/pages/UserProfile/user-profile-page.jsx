@@ -16,7 +16,7 @@ const UserProfilePage = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  // const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
@@ -50,15 +50,17 @@ const UserProfilePage = ({ location, history }) => {
   };
 
   return (
-    <Row>
+    <Row style={{ display: "flex",
+      justifyContent: "center"}}>
       <Col md={3}>
+      {error && <Message variant="danger">{error}</Message>}
         {message && <Message variant="danger">{message}</Message>}
-        {errorMessage && <Message variant="danger">{errorMessage}</Message>}
+        {/* {errorMessage && <Message variant="danger">{errorMessage}</Message>} */}
         {success && <Message variant="success">DATA UPDATED</Message>}
         {loading && <Loader></Loader>}
         <h2>USER PROFILE</h2>
 
-        <Form onSubmit={submitHandler}>
+        <Form  onSubmit={submitHandler}>
           <Form.Group controlId="name">
             <Form.Label>NAME</Form.Label>
             <Form.Control
@@ -68,7 +70,7 @@ const UserProfilePage = ({ location, history }) => {
               onChange={(e) => {
                 setName(e.target.value);
                 setMessage(null);
-                setErrorMessage(null);
+                // setErrorMessage(null);
               }}
             ></Form.Control>
           </Form.Group>
@@ -79,10 +81,11 @@ const UserProfilePage = ({ location, history }) => {
               type="email"
               placeholder="Enter Email"
               value={email}
+              disabled="true"
               onChange={(e) => {
                 setEmail(e.target.value);
                 setMessage(null);
-                setErrorMessage(null);
+                // setErrorMessage(null);
               }}
             ></Form.Control>
           </Form.Group>
@@ -96,7 +99,7 @@ const UserProfilePage = ({ location, history }) => {
               onChange={(e) => {
                 setMessage(null);
                 setPassword(e.target.value);
-                setErrorMessage(null);
+                // setErrorMessage(null);
               }}
             ></Form.Control>
           </Form.Group>
@@ -109,17 +112,16 @@ const UserProfilePage = ({ location, history }) => {
               onChange={(e) => {
                 setMessage(null);
                 setConfirmPassword(e.target.value);
-                setErrorMessage(null);
+                // setErrorMessage(null);
               }}
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary">
+          <Button style={{width:"100%"}} type="submit" variant="primary">
             UPDATE
           </Button>
         </Form>
       </Col>
-      <Col></Col>
     </Row>
   );
 };
