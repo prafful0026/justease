@@ -5,6 +5,8 @@ import {
   LAWYER_DETAILS_SUCCESS,
   LAWYER_DETAILS_REQUEST,
   LAWYER_DETAILS_FAIL,
+  LAWYER_DETAILS_RESET,
+
 } from "../constants/lawyerConstants.js";
 
 export const lawyerListReducer = (state = { lawyers: [] }, action) => {
@@ -27,6 +29,8 @@ export const lawyerDetailsReducer = (state = { lawyer: {reviews:[]} }, action) =
       return { loading: false, lawyer: action.payload };
     case LAWYER_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+      case LAWYER_DETAILS_RESET:
+      return { lawyer: {} }
     default:
       return state;
   }

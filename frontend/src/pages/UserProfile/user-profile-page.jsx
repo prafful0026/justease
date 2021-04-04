@@ -28,7 +28,7 @@ const UserProfilePage = ({ location, history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo||userInfo.userType==="lawyer") {
       history.push('/userLogin')
     } else {
       if (!user.name) {
@@ -45,7 +45,7 @@ const UserProfilePage = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords dont match");
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password,userType:"user" }));
     }
   };
 
@@ -81,7 +81,7 @@ const UserProfilePage = ({ location, history }) => {
               type="email"
               placeholder="Enter Email"
               value={email}
-              disabled="true"
+              disabled={true}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setMessage(null);

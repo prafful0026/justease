@@ -27,7 +27,7 @@ const LawyerPage = ({ history, match }) => {
     //  dispatch(listLawyerDetails(match.params.id));
     if(lawyer.isVerified===false)
     history.push("/lawyers")
-  }, [dispatch, match,lawyer.isVerified]); //to avoid the dependency warning message
+  }, [dispatch, match,lawyer.isVerified,history,userInfo,lawyer._id]); //to avoid the dependency warning message
   const bookAppointmentHandler=()=>{
      history.push(`/appoint/${match.params.id}`)
   }
