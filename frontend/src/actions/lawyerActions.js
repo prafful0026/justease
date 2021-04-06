@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   LAWYER_DETAILS_FAIL,
   LAWYER_DETAILS_REQUEST,
@@ -5,13 +7,15 @@ import {
   LAWYER_LIST_FAIL,
   LAWYER_LIST_REQUEST,
   LAWYER_LIST_SUCCESS,
+  LAWYER_REVIEW_SUCCESS,
+  LAWYER_REVIEW_REQUEST,
+  LAWYER_REVIEW_FAIL,
 } from "../constants/lawyerConstants.js";
-import Axios from "axios";
 
 export const listLawyers = () => async (dispatch) => {
   try {
     dispatch({ type: LAWYER_LIST_REQUEST });
-    const { data } = await Axios.get("/api/lawyers");
+    const { data } = await axios.get("/api/lawyers");
     dispatch({
       type: LAWYER_LIST_SUCCESS,
       payload: data,
@@ -34,12 +38,12 @@ export const listLawyerDetails = (id) => async (dispatch) => {
     //     "Content-Type": "application/json",
     //   },
     // };
-    const { data } = await Axios.get(`/api/lawyers/${id}`);
+    const { data } = await axios.get(`/api/lawyers/${id}`);
     // console.log(data)
     dispatch({
       type: LAWYER_DETAILS_SUCCESS,
       payload: data,
-    });
+    })
   } catch (error) {
     dispatch({
       type: LAWYER_DETAILS_FAIL,
@@ -51,3 +55,42 @@ export const listLawyerDetails = (id) => async (dispatch) => {
   }
 };
 
+export const createLawyerReview =   (lawyerId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type:LAWYER_REVIEW_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.post(`/api/lawyers/${lawyerId}/reviews`, review, config)
+
+    dispatch({
+      type:LAWYER_REVIEW_SUCCESS,
+    })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    // if (message === 'Not authorized, token failed') {
+    //   dispatch(logout())
+    // }
+    dispatch({
+      type:LAWYER_REVIEW_FAIL,
+      payload: message,
+    })
+  }
+}

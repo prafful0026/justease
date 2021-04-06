@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   lawyerListReducer,
   lawyerDetailsReducer,
+  lawyerReviewReducer
 } from "./reducers/lawyerReducers.js";
 import {
   userRegisterReducer,
@@ -22,7 +23,7 @@ const reducer = combineReducers({
   userUpdateProfile:userUpdateProfileReducer,
   userList:userListReducer,
   userDelete:userDeleteReducer,
-  
+  lawyerReview:lawyerReviewReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -31,11 +32,11 @@ const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };
 
-const middleware = [thunk];
+// const middleware = [thunk];
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 export default store;
