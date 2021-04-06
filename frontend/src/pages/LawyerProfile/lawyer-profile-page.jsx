@@ -176,6 +176,14 @@ const LawyerProfilePage = ({ location, history }) => {
             ></Form.Control>
           </Form.Group>
 
+          <Form.Group controlId='verified'>
+            <Form.Label>VERIFIED</Form.Label>
+            <Form.Control
+              disabled={true}
+              value={lawyer.isVerified?"YES":"NO"}
+            ></Form.Control>
+          </Form.Group>
+
           <Form.Group controlId='category'>
             <Form.Label>category</Form.Label>
             <Form.Control

@@ -38,6 +38,36 @@ const getLawyerProfile=asyncHandler(async (req, res) => {
 
 });
 
+const reviewLawyer=asyncHandler(async(req,res)=>{
+  console.log(req.user)
+  const {rating,comment}=req.body;
+
+  const lawyer=await Lawyer.findOne({_id:req.params.id})
+  if(lawyer){
+    const alreadyReviewed=lawyer.reviews.find(r=>r.user.toString()===req.user._id.toString())
+
+    if(alreadyReviewed){
+      res.status(400)
+      throw new Error("already reviewed")
+    }
+    const review={
+     name:req.user.name,
+     rating:Number(rating),
+     comment,
+     user: req.user._id 
+    } 
+    lawyer.reviews.push(review)
+    lawyer.numReviews=lawyer.reviews.length
+    lawyer.rating = lawyer.reviews.reduce((acc,item)=>item.rating+acc,0)/lawyer.reviews.length
+    await lawyer.save()
+    res.status(201).json({message:"review added"})
+  }
+  else{
+    res.status(404);
+    throw new Error("Product not found");
+  }
+}) 
 
 
-export { getLawyerById, getLawyers,getLawyerProfile };
+
+export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer };
