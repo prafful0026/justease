@@ -4,6 +4,7 @@ import connectDB from './config/db.js'
 import lawyerRoutes from './routes/lawyerRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import caseRoutes from "./routes/caseRoutes.js"
 import path from "path";
 import morgan from "morgan";
 import { notFound,errorHandler } from './middlewares/errorMiddleware.js'
@@ -25,7 +26,7 @@ app.get('/',(req,res)=>{
 app.use('/api/lawyers/',lawyerRoutes)
 app.use('/api/users/',userRoutes)
 app.use('/api/upload/',uploadRoutes)
-
+app.use('/api/case/',caseRoutes)
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
