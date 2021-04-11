@@ -5,8 +5,8 @@ import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import FormContainer from "../../components/FormContainer/FormContainer.jsx";
 import { listLawyerDetails } from "../../actions/lawyerActions.js";
-import axios from "axios"
-import {createCase} from "../../actions/caseActions.js"
+import axios from "axios";
+import { createCase } from "../../actions/caseActions.js";
 const AppointPage = ({ location, history, match }) => {
   const [caseDescription, setCaseDescription] = useState("");
   const [caseCategory, setCaseCategory] = useState("");
@@ -20,8 +20,8 @@ const AppointPage = ({ location, history, match }) => {
 
   const { loading, error, userInfo } = userLogin;
 
-  const caseCreate=useSelector((state)=>state.caseCreate)
-  const {success,error:caseError}=caseCreate
+  const caseCreate = useSelector((state) => state.caseCreate);
+  const { success, error: caseError } = caseCreate;
 
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const { lawyer, error: lawyerError } = lawyerDetails;
@@ -38,37 +38,48 @@ const AppointPage = ({ location, history, match }) => {
   }, [lawyerError]);
 
   const submitHandler = async (e) => {
-    e.preventDefault()
-    
-    const userId=userInfo._id
-    const lawyerId=lawyer._id
-    const Case={caseId,caseCategory,caseDescription,email,lawyerId,userId}
-    console.log(Case)
-   dispatch(createCase({ 
-    caseId,
-    caseCategory,
-    caseDescription,
-    email,
-    lawyerId,
-    userId,
-    contactNo}))
-    
+    e.preventDefault();
+
+    const userId = userInfo._id;
+    const lawyerId = lawyer._id;
+    const lawyerName = lawyer.name;
+    const userName = userInfo.name;
+    const Case = {
+      caseId,
+      caseCategory,
+      caseDescription,
+      email,
+      lawyerId,
+      userId,
+    };
+    console.log(Case);
+    dispatch(
+      createCase({
+        caseId,
+        caseCategory,
+        caseDescription,
+        email,
+        lawyerId,
+        userId,
+        contactNo,
+        lawyerName,
+        userName,
+      })
+    );
   };
-  useEffect(()=>{
-    if(success)
-    history.push("/")
-  },[success,history])
+  useEffect(() => {
+    if (success) history.push("/cases");
+  }, [success, history]);
   return (
     <FormContainer>
       <h1>appoint</h1>
       {caseError && <Message variant='danger'>{caseError}</Message>}
-      
+
       {error && <Message variant='danger'>{error}</Message>}
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {loading && <Loader></Loader>}
       <Form onSubmit={submitHandler}>
-
-      <Form.Group controlId='caseId'>
+        <Form.Group controlId='caseId'>
           <Form.Label>Case ID</Form.Label>
           <Form.Control
             disabled={!lawyer || !lawyer.isAvailable}
@@ -81,7 +92,7 @@ const AppointPage = ({ location, history, match }) => {
             }}
           ></Form.Control>
         </Form.Group>
-         
+
         <Form.Group controlId='category'>
           <Form.Label>Category</Form.Label>
           <Form.Control

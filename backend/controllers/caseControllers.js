@@ -12,8 +12,10 @@ const createCase = asyncHandler(async (req, res) => {
     userId,
     lawyerId,
     caseId,
+    lawyerName,
+    userName
   } = req.body;
-  console.log(contactNo)
+  // console.log(contactNo)
 
   const caseExist = await Case.findOne({ caseId: caseId });
   // console.log(caseExist) 
@@ -25,11 +27,12 @@ const createCase = asyncHandler(async (req, res) => {
       email,
       userId,
       lawyerId,
-
       contactNo,
       caseCategory,
       caseDescription,
       caseId,
+      lawyerName,
+      userName
     });
     // newCase.save()
   // console.log(newCase)
@@ -43,18 +46,26 @@ const createCase = asyncHandler(async (req, res) => {
 });
 
 const userCases = asyncHandler(async (req, res) => {
-  console.log(req)
+  // console.log(req)
 
     const {
       _id
     } = req.user;
-    //  res.json({_id})
-    const cases = await Case.find({lawyerId:_id})
-    if(cases.length>0)
-    {res.status(201).json(cases)
-    }
+     console.log(_id)
+    const caseLawyer = await Case.find({lawyerId:_id})
+    const caseUser = await Case.find({userId:_id})
+   if(caseLawyer.length>0)
+   {
+    res.status(201).json(caseLawyer)
+   }
+   else if(caseUser.length>0)
+   {
+    res.status(201).json(caseUser)
+   }
+    
     else{
-        res.send("not found any cases")
+      res.status(401);
+      throw new Error("No cases found");
     }
   });
 

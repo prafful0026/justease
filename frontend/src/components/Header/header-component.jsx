@@ -66,22 +66,34 @@ const Header = () => {
                   </NavDropdown>
                 </>
               ) : userInfo && userInfo.userType==="lawyer"? (
-                <NavDropdown className='px-4' title={name}>
-                  <LinkContainer to='/lawyerProfile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : userInfo && userInfo.userType==="user"?( <NavDropdown className='px-4' title={name}>
-              <LinkContainer to='/profile'>
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <>  < LinkContainer to='/cases'>
+                <Nav.Link>Cases</Nav.Link>
               </LinkContainer>
-              <NavDropdown.Item onClick={logoutHandler}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>):
+          <NavDropdown className='px-4' title={name}>
+            <LinkContainer to='/lawyerProfile'>
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+            </LinkContainer>
+            <NavDropdown.Item onClick={logoutHandler}>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown></>
+             
+              ) : userInfo && userInfo.userType==="user"?( 
+                <>
+                < LinkContainer to='/cases'>
+                <Nav.Link>Cases</Nav.Link>
+              </LinkContainer>
+              <NavDropdown className='px-4' title={name}>
+                
+                <LinkContainer to='/profile'>
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+                </>
+            ):
               (
                 <NavDropdown className='px-4' title='LOGIN/SIGNUP'>
                   <LinkContainer to='/userLogin'>

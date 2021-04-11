@@ -16,6 +16,7 @@ import LawyerRegisterPage from "./pages/LawyerRegister/lawyer-register-page";
 import UserListPage from "./pages/Users/users-page.jsx";
 import LawyerList from "./pages/LawyerList/lawyer-list.jsx";
 import LawyerProfilePage from "./pages/LawyerProfile/lawyer-profile-page.jsx"
+import CasesPage from "./pages/CasesPage/CasesPage.js"
 class App extends React.Component {
   state={message:""}
   render(){
@@ -37,6 +38,7 @@ class App extends React.Component {
           <Route path='/lawyerRegister' component={LawyerRegisterPage} exact/>
           <Route path='/admin/userList' component={UserListPage} exact/>
           <Route path='/admin/lawyerList' component={LawyerList} exact/>
+          <Route path='/cases' component={CasesPage} exact/>
  
         </Container>
       </main>

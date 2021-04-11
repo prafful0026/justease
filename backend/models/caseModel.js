@@ -40,6 +40,14 @@ const caseSchema = mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    lawyerName:{
+      type: String,
+      required: true,
+    },
+    userName:{
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

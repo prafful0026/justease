@@ -3,17 +3,22 @@ import {
   CASE_REGISTER_FAIL,
   CASE_REGISTER_REQUEST,
   CASE_REGISTER_SUCCESS,
+  CASE_LIST_FAIL,
+  CASE_LIST_REQUEST,
+  CASE_LIST_SUCCESS,
 } from "../constants/caseConstants.js";
 
-export const createCase = (
-  {caseId,
+export const createCase = ({
+  caseId,
   caseCategory,
   caseDescription,
   email,
   lawyerId,
   userId,
-  contactNo}
-) => async (dispatch,getState) => {
+  contactNo,
+  lawyerName,
+  userName,
+}) => async (dispatch, getState) => {
   try {
     dispatch({
       type: CASE_REGISTER_REQUEST,
@@ -37,7 +42,9 @@ export const createCase = (
         email,
         lawyerId,
         userId,
-        contactNo
+        contactNo,
+        lawyerName,
+        userName,
       },
       config
     );
@@ -48,6 +55,37 @@ export const createCase = (
   } catch (error) {
     dispatch({
       type: CASE_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listCases = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: CASE_LIST_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get("/api/case", config);
+    dispatch({
+      type: CASE_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CASE_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
