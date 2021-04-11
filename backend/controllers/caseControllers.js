@@ -13,22 +13,28 @@ const createCase = asyncHandler(async (req, res) => {
     lawyerId,
     caseId,
   } = req.body;
+  console.log(contactNo)
 
   const caseExist = await Case.findOne({ caseId: caseId });
+  // console.log(caseExist) 
   if (caseExist) {
     res.status(400);
     throw new Error("case already exist");
   } else {
     const newCase = await Case.create({
       email,
+      userId,
+      lawyerId,
+
       contactNo,
       caseCategory,
       caseDescription,
-      userId,
-      lawyerId,
       caseId,
     });
-    if (newCase) res.status(201).send("case made successfully");
+    // newCase.save()
+  // console.log(newCase)
+    
+    if (newCase) res.status(201).send("success");
     else {
       res.status(400);
       throw new Error("invalid data");

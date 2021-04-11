@@ -14,6 +14,7 @@ import {
   userListReducer,
   userDeleteReducer
 } from "./reducers/userReducers.js";
+import {caseCreateReducer} from "./reducers/caseReducers.js"
 const reducer = combineReducers({
   lawyerList: lawyerListReducer,
   lawyerDetails: lawyerDetailsReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   userList:userListReducer,
   userDelete:userDeleteReducer,
   lawyerReview:lawyerReviewReducer,
+  caseCreate:caseCreateReducer
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

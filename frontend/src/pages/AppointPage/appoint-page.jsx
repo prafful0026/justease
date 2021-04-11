@@ -5,6 +5,8 @@ import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import FormContainer from "../../components/FormContainer/FormContainer.jsx";
 import { listLawyerDetails } from "../../actions/lawyerActions.js";
+import axios from "axios"
+import {createCase} from "../../actions/caseActions.js"
 const AppointPage = ({ location, history, match }) => {
   const [caseDescription, setCaseDescription] = useState("");
   const [caseCategory, setCaseCategory] = useState("");
@@ -12,10 +14,14 @@ const AppointPage = ({ location, history, match }) => {
   const [email, setEmail] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  // const [success,setSuccess]=useState(false)
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
 
   const { loading, error, userInfo } = userLogin;
+
+  const caseCreate=useSelector((state)=>state.caseCreate)
+  const {success,error:caseError}=caseCreate
 
   const lawyerDetails = useSelector((state) => state.lawyerDetails);
   const { lawyer, error: lawyerError } = lawyerDetails;
@@ -31,17 +37,32 @@ const AppointPage = ({ location, history, match }) => {
     if (lawyerError) setErrorMessage("LAWYER NOT FOUND!!");
   }, [lawyerError]);
 
-  const submitHandler = (e) => {
-    let userId=userInfo._id
-    let lawyerId=lawyer._id
-
+  const submitHandler = async (e) => {
     e.preventDefault()
+    
+    const userId=userInfo._id
+    const lawyerId=lawyer._id
     const Case={caseId,caseCategory,caseDescription,email,lawyerId,userId}
     console.log(Case)
+   dispatch(createCase({ 
+    caseId,
+    caseCategory,
+    caseDescription,
+    email,
+    lawyerId,
+    userId,
+    contactNo}))
+    
   };
+  useEffect(()=>{
+    if(success)
+    history.push("/")
+  },[success,history])
   return (
     <FormContainer>
       <h1>appoint</h1>
+      {caseError && <Message variant='danger'>{caseError}</Message>}
+      
       {error && <Message variant='danger'>{error}</Message>}
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {loading && <Loader></Loader>}
@@ -108,7 +129,7 @@ const AppointPage = ({ location, history, match }) => {
           <Form.Label>Your Contact No.</Form.Label>
           <Form.Control
             disabled={!lawyer || !lawyer.isAvailable}
-            type='tel'
+            type='text'
             placeholder='Enter Contact Number'
             value={contactNo}
             onChange={(e) => {

@@ -5,20 +5,20 @@ const caseSchema = mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     lawyerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Lawyer",
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
       required: true,
     },
     contactNo: {
-      type: Number,
-      required: true,
+      type: String,
+      // required: true,
     },
     caseId:{
     type:String,
