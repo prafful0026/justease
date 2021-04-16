@@ -6,7 +6,7 @@ import {
   lawyerDetailsReducer,
   lawyerReviewReducer,
   lawyerDeleteReducer,
-  lawyerVerifyReducer
+  lawyerVerifyReducer,
 } from "./reducers/lawyerReducers.js";
 import {
   userRegisterReducer,
@@ -14,23 +14,30 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
   userListReducer,
-  userDeleteReducer
+  userDeleteReducer,
 } from "./reducers/userReducers.js";
-import {caseCreateReducer,caseListReducer} from "./reducers/caseReducers.js"
+import {
+  caseCreateReducer,
+  caseListReducer,
+  caseDeleteReducer,
+  caseAcceptReducer,
+} from "./reducers/caseReducers.js";
 const reducer = combineReducers({
   lawyerList: lawyerListReducer,
   lawyerDetails: lawyerDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
-  userUpdateProfile:userUpdateProfileReducer,
-  userList:userListReducer,
-  userDelete:userDeleteReducer,
-  lawyerReview:lawyerReviewReducer,
-  caseCreate:caseCreateReducer,
-  caseList:caseListReducer,
-  lawyerDelete:lawyerDeleteReducer,
-  lawyerVerify:lawyerVerifyReducer
+  userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
+  lawyerReview: lawyerReviewReducer,
+  caseCreate: caseCreateReducer,
+  caseList: caseListReducer,
+  caseDelete:caseDeleteReducer,
+  caseAccept:caseAcceptReducer,
+  lawyerDelete: lawyerDeleteReducer,
+  lawyerVerify: lawyerVerifyReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

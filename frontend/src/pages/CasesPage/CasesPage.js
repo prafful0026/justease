@@ -3,7 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
-import { listCases } from "../../actions/caseActions.js"
+import { listCases,deleteCase,acceptCase } from "../../actions/caseActions.js"
 
 const CasesPage = ({history,location}) => {
     const dispatch = useDispatch();
@@ -13,6 +13,12 @@ const CasesPage = ({history,location}) => {
 //   const [userType]=useState("")
   const userLogin = useSelector((state) => state.userLogin); 
   const { userInfo } = userLogin;
+
+  const caseDelete=useSelector((state)=>state.caseDelete)
+  const {success:deleteSuccess,error:deleteError}=caseDelete 
+
+  const caseAccept=useSelector((state)=>state.caseAccept)
+  const {success:acceptSuccess,error:acceptError}=caseAccept
   
   useEffect(() => {
     if(userInfo)
@@ -23,13 +29,17 @@ const CasesPage = ({history,location}) => {
     {
         history.push('/userLogin')
     }
-  }, [dispatch,history,userInfo]);
+  }, [dispatch,history,userInfo,deleteSuccess,acceptSuccess]);
 
   const deleteHandler=(id)=>{
-    // if(window.confirm('Are you sure'))
-    //   dispatch(deleteUser(id))
+    if(window.confirm('Are you sure'))
+      dispatch(deleteCase(id))
     console.log("case delete  ")
   }
+  const acceptHandler = (id) => {
+    console.log("Accept");
+    dispatch(acceptCase(id))
+  };
     return (
         <>
         {userInfo && userInfo.userType==="user"?(<><h1>Cases</h1>
@@ -108,7 +118,7 @@ const CasesPage = ({history,location}) => {
                           </>
                         </td>
                         {userCase.isAccepted===false?(<td>
-                          <Button srtle={{color:"green"}} className='btn-sm'>Accept <i class="fas fa-check-square"></i></Button>
+                          <Button srtle={{color:"green"}} className='btn-sm' onClick={()=>acceptHandler(userCase._id)}>Accept <i class="fas fa-check-square"></i></Button>
                         </td>):(<td style={{color:"green"}}>Actice</td>)}
                         <td>
                     <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(userCase._id)}><i className='fas fa-trash'></i></Button>

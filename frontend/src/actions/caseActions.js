@@ -6,6 +6,12 @@ import {
   CASE_LIST_FAIL,
   CASE_LIST_REQUEST,
   CASE_LIST_SUCCESS,
+  CASE_DELETE_REQUEST,
+  CASE_DELETE_SUCCESS,
+  CASE_DELETE_FAIL,
+  CASE_ACCEPT_REQUEST,
+  CASE_ACCEPT_SUCCESS,
+  CASE_ACCEPT_FAIL,
 } from "../constants/caseConstants.js";
 
 export const createCase = ({
@@ -86,6 +92,67 @@ export const listCases = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: CASE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteCase = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: CASE_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    await axios.delete(`/api/case/${id}`, config);
+    dispatch({
+      type: CASE_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: CASE_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const acceptCase = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: CASE_ACCEPT_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const cases = "hi";
+
+    await axios.put(`/api/case/${id}`, cases, config);
+    dispatch({
+      type: CASE_ACCEPT_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: CASE_ACCEPT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
