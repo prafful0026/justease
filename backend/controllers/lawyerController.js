@@ -91,7 +91,19 @@ export const verifyLawyer=asyncHandler(async (req,res)=>{
 
   }
 })
+const deleteLawyer = asyncHandler(async (req, res) => {
+  const lawyer = await Lawyer.findById(req.params.id);
+  if(lawyer)
+  {
+      await lawyer.remove()
+      res.json({message:"lawyer deleted"})   
+  }
+  else
+  {
+    res.status(404)
+    throw new Error('lawyer not found')
+  }
+});
 
 
-
-export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer };
+export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer ,deleteLawyer};
