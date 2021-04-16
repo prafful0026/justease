@@ -192,6 +192,7 @@ export const listUsers = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
+        
         Authorization: `Bearer ${userInfo.token}`,
       },
     };

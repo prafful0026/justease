@@ -10,7 +10,12 @@ import {
   LAWYER_REVIEW_REQUEST,
   LAWYER_REVIEW_FAIL,
   LAWYER_REVIEW_RESET,
-
+  LAWYER_DELETE_REQUEST,
+  LAWYER_DELETE_SUCCESS,
+  LAWYER_DELETE_FAIL,
+  LAWYER_VERIFY_REQUEST,
+  LAWYER_VERIFY_SUCCESS,
+  LAWYER_VERIFY_FAIL
 } from "../constants/lawyerConstants.js";
 
 export const lawyerListReducer = (state = { lawyers: [] }, action) => {
@@ -56,3 +61,28 @@ export const lawyerReviewReducer = (state = {}, action) => {
 }
 
 // export default lawyerListReducer;
+export const lawyerDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case LAWYER_DELETE_REQUEST:
+      return { loading: true };
+    case LAWYER_DELETE_SUCCESS:
+      return { loading: false,success:true };
+    case LAWYER_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const lawyerVerifyReducer = (state = {}, action) => {
+  switch (action.type) {
+    case LAWYER_VERIFY_REQUEST:
+      return { loading: true };
+    case LAWYER_VERIFY_SUCCESS:
+      return { loading: false,success:true };
+    case LAWYER_VERIFY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

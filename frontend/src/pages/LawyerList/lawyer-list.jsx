@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
-import { listLawyers } from "../../actions/lawyerActions";
+import { listLawyers,deleteLaywer,verifyLaywer } from "../../actions/lawyerActions";
 
 const LawyerList = ({ history }) => {
   const dispatch = useDispatch();
@@ -13,6 +13,12 @@ const LawyerList = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  
+  const lawyerDelete=useSelector((state)=>state.lawyerDelete)
+  const {success:deleteSuccess,error:deleteError}=lawyerDelete 
+
+  const lawyerVerify=useSelector((state)=>state.lawyerVerify)
+  const {success:verifySuccess,error:verifyError}=lawyerVerify 
 
   useEffect(() => {
     if (userInfo && userInfo.userType === "admin") {
@@ -20,12 +26,14 @@ const LawyerList = ({ history }) => {
     } else {
       history.push("/userLogin");
     }
-  }, [dispatch, history, userInfo]);
-  const deleteHandler = () => {
+  }, [dispatch, history, userInfo,deleteSuccess,verifySuccess]);
+  const deleteHandler = (id) => {
     console.log("delete");
+    dispatch(deleteLaywer(id))
   };
-  const verifyHandler = () => {
+  const verifyHandler = (id) => {
     console.log("verify");
+    dispatch(verifyLaywer(id))
   };
   return (
     <>
@@ -63,7 +71,7 @@ const LawyerList = ({ history }) => {
                   <Button
                     variant='light'
                     className='btn-sm'
-                    onClick={verifyHandler}
+                    onClick={() =>verifyHandler(lawyer._id)}
                   >
                     <i className='fas fa-edit'></i>
                   </Button>
@@ -72,7 +80,7 @@ const LawyerList = ({ history }) => {
                   <Button
                     variant='danger'
                     className='btn-sm'
-                    onClick={() => deleteHandler(lawyer.id)}
+                    onClick={() => deleteHandler(lawyer._id)}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>

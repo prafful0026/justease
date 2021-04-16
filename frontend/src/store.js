@@ -4,7 +4,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   lawyerListReducer,
   lawyerDetailsReducer,
-  lawyerReviewReducer
+  lawyerReviewReducer,
+  lawyerDeleteReducer,
+  lawyerVerifyReducer
 } from "./reducers/lawyerReducers.js";
 import {
   userRegisterReducer,
@@ -26,7 +28,9 @@ const reducer = combineReducers({
   userDelete:userDeleteReducer,
   lawyerReview:lawyerReviewReducer,
   caseCreate:caseCreateReducer,
-  caseList:caseListReducer
+  caseList:caseListReducer,
+  lawyerDelete:lawyerDeleteReducer,
+  lawyerVerify:lawyerVerifyReducer
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

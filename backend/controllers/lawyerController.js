@@ -70,6 +70,7 @@ const reviewLawyer=asyncHandler(async(req,res)=>{
 
 export const verifyLawyer=asyncHandler(async (req,res)=>{
   try {
+    console.log(req.params.id)
   const lawyer = await Lawyer.findById(req.params.id);
   if(!lawyer)
   {

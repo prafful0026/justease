@@ -10,6 +10,12 @@ import {
   LAWYER_REVIEW_SUCCESS,
   LAWYER_REVIEW_REQUEST,
   LAWYER_REVIEW_FAIL,
+  LAWYER_DELETE_REQUEST,
+  LAWYER_DELETE_SUCCESS,
+  LAWYER_DELETE_FAIL,
+  LAWYER_VERIFY_REQUEST,
+  LAWYER_VERIFY_SUCCESS,
+  LAWYER_VERIFY_FAIL
 } from "../constants/lawyerConstants.js";
 
 export const listLawyers = () => async (dispatch) => {
@@ -94,3 +100,64 @@ export const createLawyerReview =   (lawyerId, review) => async (
     })
   }
 }
+
+export const deleteLaywer = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: LAWYER_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    await axios.delete(`/api/lawyers/${id}`, config);
+    dispatch({
+      type: LAWYER_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: LAWYER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const verifyLaywer = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: LAWYER_VERIFY_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const lawyer="hi"
+    await axios.put(`/api/lawyers/verify/${id}`,lawyer, config);
+    dispatch({
+      type: LAWYER_VERIFY_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: LAWYER_VERIFY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
