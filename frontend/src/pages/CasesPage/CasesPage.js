@@ -13,7 +13,7 @@ const CasesPage = ({history,location}) => {
 //   const [userType]=useState("")
   const userLogin = useSelector((state) => state.userLogin); 
   const { userInfo } = userLogin;
-
+  
   useEffect(() => {
     if(userInfo)
     {
@@ -25,7 +25,11 @@ const CasesPage = ({history,location}) => {
     }
   }, [dispatch,history,userInfo]);
 
-
+  const deleteHandler=(id)=>{
+    // if(window.confirm('Are you sure'))
+    //   dispatch(deleteUser(id))
+    console.log("case delete  ")
+  }
     return (
         <>
         {userInfo && userInfo.userType==="user"?(<><h1>Cases</h1>
@@ -42,6 +46,8 @@ const CasesPage = ({history,location}) => {
                 <th>Email</th>
                 <th>Contact No.</th>
                 <th>Lawyer</th>
+                <th>Case Status</th>
+                <th>Delete Case</th>
               </tr>
               </thead>
               <tbody>
@@ -58,9 +64,12 @@ const CasesPage = ({history,location}) => {
                          {userCase.lawyerName}
                       </a>
                     </td>
-                    {/* <td>
-                        <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(user._id)}><i className='fas fa-trash'></i></Button>
-                    </td> */}
+                    <>
+                        {userCase.isAccepted===false?<td style={{color:"red"}}>Not accepted by lawyer</td>:<td style={{color:"green"}}>Active</td>}
+                    </>
+                    <td>
+                    <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(userCase._id)}><i className='fas fa-trash'></i></Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -80,6 +89,8 @@ const CasesPage = ({history,location}) => {
                     <th>Client Email</th>
                     <th>Client Contact No.</th>
                     <th>Client Name</th>
+                    <th>Case status</th>
+                    <th>Delete Case</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -96,9 +107,12 @@ const CasesPage = ({history,location}) => {
                              {userCase.userName}
                           </>
                         </td>
-                        {/* <td>
-                            <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(user._id)}><i className='fas fa-trash'></i></Button>
-                        </td> */}
+                        {userCase.isAccepted===false?(<td>
+                          <Button srtle={{color:"green"}} className='btn-sm'>Accept <i class="fas fa-check-square"></i></Button>
+                        </td>):(<td style={{color:"green"}}>Actice</td>)}
+                        <td>
+                    <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(userCase._id)}><i className='fas fa-trash'></i></Button>
+                    </td> 
                       </tr>
                     ))}
                   </tbody>

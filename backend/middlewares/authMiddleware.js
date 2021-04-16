@@ -15,13 +15,18 @@ const protect =asyncHandler( async (req,res,next)=>{
            const decoded=jwt.verify(token,process.env.JWT_SECRET)
            const frontUser=await User.findById(decoded.id).select('-password')
            const frontLawyer=await Lawyer.findById(decoded.id).select('-password')
+        //    console.log(frontLawyer)
+
           if(frontLawyer)
-          req.user=frontLawyer
+         { req.user=frontLawyer
+            // console.log(req.user)
+            next()
+        }
           else if(frontUser)
-          req.user=frontUser
-          else 
-          req.user=null
-           next()
+         { req.user=frontUser
+            next()
+         
+        }
        } catch (error) {
            console.error(error)
            res.status(401)

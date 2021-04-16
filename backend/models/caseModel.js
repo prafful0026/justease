@@ -22,7 +22,8 @@ const caseSchema = mongoose.Schema(
     },
     caseId:{
     type:String,
-    required:true
+    required:true,
+    unique:true
     },
     caseCategory: {
       type: String,

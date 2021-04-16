@@ -200,5 +200,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error('user not found')
   }
 });
+
+
 export { deleteUser, authUser, getUserProfile, registerUser, updateUserProfile ,getUsers};
 

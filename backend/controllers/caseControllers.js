@@ -69,5 +69,50 @@ const userCases = asyncHandler(async (req, res) => {
     }
   });
 
+  const deleteCase = asyncHandler(async (req, res) => {
+    console.log(req.user._id)
+    const userCase = await Case.findById(req.params.id);
+    console.log(userCase.lawyerId)
+    if(userCase)
+    {   if((userCase.lawyerId).equals(req.user._id)||(userCase.userId.equals(req.user._id)))
+        { await userCase.remove()
+        res.json({message:"case deleted"})
+        }   
+        else
 
-export { createCase,userCases };
+        {
+          res.status(404)
+          throw new Error('case not found yth')
+        }
+    }
+    else
+    {
+      res.status(404)
+      throw new Error('case not found')
+    }
+  });
+  const acceptCase = asyncHandler(async (req, res) => {
+    // console.log(req.user._id)
+    const userCase = await Case.findById(req.params.id);
+    // console.log(userCase.lawyerId)
+    if(userCase)
+    {   if((userCase.lawyerId).equals(req.user._id))
+        {  userCase.isAccepted=!userCase.isAccepted
+           await userCase.save()
+        res.json({message:"case accepted"})
+        }   
+        else
+
+        {
+          res.status(404)
+          throw new Error('case not found yth')
+        }
+    }
+    else
+    {
+      res.status(404)
+      throw new Error('case not found')
+    }
+  });
+
+export { createCase,userCases,deleteCase,acceptCase };
