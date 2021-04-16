@@ -68,6 +68,30 @@ const reviewLawyer=asyncHandler(async(req,res)=>{
   }
 }) 
 
+export const verifyLawyer=asyncHandler(async (req,res)=>{
+  try {
+  const lawyer = await Lawyer.findById(req.params.id);
+  if(!lawyer)
+  {
+    res.status(404);
+    throw new Error("lawyer not found");
+  }
+  else
+  {
+    lawyer.isVerified=!lawyer.isVerified
+    const updatedLawyer= await lawyer.save();
+    res.send("success")
+
+
+  }
+      
+  } catch (error) {
+    res.status(500)
+    throw new Error("server error");
+
+  }
+})
+
 
 
 export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer };
