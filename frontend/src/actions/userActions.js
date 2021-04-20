@@ -22,7 +22,7 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
   USER_LIST_RESET,
 } from "../constants/userConstants.js";
-
+import { LAWYER_DETAILS_RESET } from "../constants/lawyerConstants";
 export const login = (email, password, userType) => async (dispatch) => {
   try {
     dispatch({
@@ -59,6 +59,9 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: LAWYER_DETAILS_RESET });
+
+
 };
 
 export const register = (

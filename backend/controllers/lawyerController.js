@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Lawyer from "../models/lawyerModel.js";
 import generateToken from "../utils/generateToken.js";
+import Case from "../models/caseModel.js"
 
 const getLawyers = asyncHandler(async (req, res) => {
   const lawyers = await Lawyer.find({});
@@ -96,6 +97,8 @@ const deleteLawyer = asyncHandler(async (req, res) => {
   const lawyer = await Lawyer.findById(req.params.id);
   if(lawyer)
   {
+   await Case.deleteMany({lawyerId:lawyer._id})
+
       await lawyer.remove()
       res.json({message:"lawyer deleted"})   
   }

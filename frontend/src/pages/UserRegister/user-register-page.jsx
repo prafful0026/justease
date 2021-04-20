@@ -44,7 +44,7 @@ const UserRegisterPage = ({location,history}) => {
   
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1>User Register</h1>
       {message&&<Message variant='danger'>{message}</Message> }
       {errorMessage&&<Message variant='danger'>{errorMessage}</Message>}
       {loading&&<Loader></Loader>}

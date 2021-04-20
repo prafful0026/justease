@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import Case from "../models/caseModel.js";
 import Lawyer from "../models/lawyerModel.js";
 import generateToken from "../utils/generateToken.js";
 
@@ -190,7 +191,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if(user)
-  {
+  {   
+   await Case.deleteMany({userId:user._id})
+
       await user.remove()
       res.json({message:"user deleted"})   
   }

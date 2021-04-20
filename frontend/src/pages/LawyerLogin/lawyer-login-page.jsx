@@ -31,7 +31,7 @@ const LawyerLoginPage = ({location,history}) => {
   }
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Lawyer Sign In</h1>
       {errorMessage&&<Message variant='danger'>{errorMessage}</Message>}
       {loading&&<Loader></Loader>}
       <Form onSubmit={submitHandler}>

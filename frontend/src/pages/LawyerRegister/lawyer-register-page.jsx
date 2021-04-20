@@ -83,7 +83,7 @@ const LawyerRegisterPage = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1>Lawyer Register</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {loading && <Loader></Loader>}
@@ -162,9 +162,9 @@ const LawyerRegisterPage = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId='description'>
-          <Form.Label>description</Form.Label>
+          <Form.Label>About yourself</Form.Label>
           <Form.Control
-            type='text'
+            as='textarea'
             placeholder='Enter description'
             value={description}
             onChange={(e) => {
