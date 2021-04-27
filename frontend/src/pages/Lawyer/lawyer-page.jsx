@@ -35,7 +35,7 @@ const LawyerPage = ({ history, match }) => {
   }
 
   useEffect(() => {
-    if(userInfo&&userInfo.userType==="lawyer")
+    if(userInfo&&(userInfo.userType==="lawyer"||userInfo.userType==="admin"))
     history.push('/');
     // console.log(lawyer);
     // lawyer.reviews.map((review) => console.log(review.name));

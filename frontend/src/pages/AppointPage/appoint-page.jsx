@@ -68,6 +68,8 @@ const AppointPage = ({ location, history, match }) => {
     );
   };
   useEffect(() => {
+    if(userInfo&&(userInfo.userType==="lawyer"||userInfo.userType==="admin"))
+    history.push('/');
     if (success) history.push("/cases");
   }, [success, history]);
   return (

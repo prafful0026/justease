@@ -1,10 +1,13 @@
 import React from 'react'
-
+import LawyerCarousel from "../../components/LawyerCarousel/LawyerCarousel"
 const HomePage = () => {
     return (
-        <div>
-            <h1>HOME PAGE</h1>
-        </div>
+        <>
+        <h1>
+            TOP LAWYERS
+        </h1>
+         <LawyerCarousel/>   
+        </>
     )
 }
 

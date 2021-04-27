@@ -7,6 +7,7 @@ import {
   lawyerReviewReducer,
   lawyerDeleteReducer,
   lawyerVerifyReducer,
+  lawyerTopRatedReducer
 } from "./reducers/lawyerReducers.js";
 import {
   userRegisterReducer,
@@ -38,6 +39,7 @@ const reducer = combineReducers({
   caseAccept:caseAcceptReducer,
   lawyerDelete: lawyerDeleteReducer,
   lawyerVerify: lawyerVerifyReducer,
+  lawyerTopRated:lawyerTopRatedReducer
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

@@ -114,6 +114,10 @@ const deleteLawyer = asyncHandler(async (req, res) => {
     throw new Error('lawyer not found')
   }
 });
+const getTopLawyers = asyncHandler(async (req, res) => {
+  const lawyers = await Lawyer.find({}).sort({ rating: -1 }).limit(3)
 
+  res.json(lawyers)
+})
 
-export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer ,deleteLawyer};
+export { getLawyerById, getLawyers,getLawyerProfile,reviewLawyer ,deleteLawyer,getTopLawyers};

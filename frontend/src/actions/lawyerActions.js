@@ -15,7 +15,10 @@ import {
   LAWYER_DELETE_FAIL,
   LAWYER_VERIFY_REQUEST,
   LAWYER_VERIFY_SUCCESS,
-  LAWYER_VERIFY_FAIL
+  LAWYER_VERIFY_FAIL,
+  LAWYER_TOP_REQUEST,
+  LAWYER_TOP_SUCCESS,
+  LAWYER_TOP_FAIL,
 } from "../constants/lawyerConstants.js";
 
 export const listLawyers = (keyword="") => async (dispatch) => {
@@ -161,3 +164,23 @@ export const verifyLaywer = (id) => async (dispatch, getState) => {
     });
   }
 };
+export const listTopLawyers = () => async (dispatch) => {
+  try {
+    dispatch({ type: LAWYER_TOP_REQUEST })
+
+    const { data } = await axios.get(`/api/lawyers/lawyer/top`)
+
+    dispatch({
+      type: LAWYER_TOP_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: LAWYER_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}

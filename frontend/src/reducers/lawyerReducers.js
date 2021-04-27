@@ -15,7 +15,10 @@ import {
   LAWYER_DELETE_FAIL,
   LAWYER_VERIFY_REQUEST,
   LAWYER_VERIFY_SUCCESS,
-  LAWYER_VERIFY_FAIL
+  LAWYER_VERIFY_FAIL,
+  LAWYER_TOP_REQUEST,
+  LAWYER_TOP_SUCCESS,
+  LAWYER_TOP_FAIL,   
 } from "../constants/lawyerConstants.js";
 
 export const lawyerListReducer = (state = { lawyers: [] }, action) => {
@@ -86,3 +89,16 @@ export const lawyerVerifyReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const lawyerTopRatedReducer = (state = { lawyers: [] }, action) => {
+  switch (action.type) {
+    case LAWYER_TOP_REQUEST:
+      return { loading: true, lawyers: [] }
+    case LAWYER_TOP_SUCCESS:
+      return { loading: false, lawyers: action.payload }
+    case LAWYER_TOP_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
