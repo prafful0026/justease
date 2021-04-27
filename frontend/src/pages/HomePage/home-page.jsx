@@ -4,7 +4,7 @@ const HomePage = () => {
     return (
         <>
         <h1>
-            TOP LAWYERS
+            TOP LAWYER
         </h1>
          <LawyerCarousel/>   
         </>
