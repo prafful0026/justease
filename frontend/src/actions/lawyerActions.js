@@ -18,10 +18,10 @@ import {
   LAWYER_VERIFY_FAIL
 } from "../constants/lawyerConstants.js";
 
-export const listLawyers = () => async (dispatch) => {
+export const listLawyers = (keyword="") => async (dispatch) => {
   try {
     dispatch({ type: LAWYER_LIST_REQUEST });
-    const { data } = await axios.get("/api/lawyers");
+    const { data } = await axios.get(`/api/lawyers?keyword=${keyword}`);
     dispatch({
       type: LAWYER_LIST_SUCCESS,
       payload: data,

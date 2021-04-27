@@ -4,7 +4,13 @@ import generateToken from "../utils/generateToken.js";
 import Case from "../models/caseModel.js"
 
 const getLawyers = asyncHandler(async (req, res) => {
-  const lawyers = await Lawyer.find({});
+  const keyword=req.query.keyword ? {
+    name:{
+      $regex:req.query.keyword,
+      $options: 'i'
+    }
+  }:{}
+  const lawyers = await Lawyer.find({...keyword});
   res.json(lawyers);
 });
 

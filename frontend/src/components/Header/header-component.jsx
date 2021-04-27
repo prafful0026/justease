@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions.js";
+import SearchBox from "../SearchBox/SearchBox";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -30,8 +32,8 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+          {(!userInfo||userInfo.userType==="user")?(<Route render={({history})=><SearchBox history={history}/>}  />):("")}
             <Nav className='ml-auto'>
-
               {/* //LAWYERS LINK- VISIBLE TO USER AND NON LOGIN */}
 
               {!userInfo || userInfo.userType === "user" ? (
@@ -49,9 +51,6 @@ const Header = () => {
                   <LinkContainer to='/profile'>
                     <Nav.Link>profile</Nav.Link>
                   </LinkContainer>
-                  <Button onClick={logoutHandler}>
-                    <Nav.Link>logout</Nav.Link>
-                  </Button>
 
                   <NavDropdown className='px-4' title='ADMIN' id='adminmenu'>
                     <LinkContainer to='/admin/userList'>
@@ -60,41 +59,41 @@ const Header = () => {
                     <LinkContainer to='/admin/lawyerList'>
                       <NavDropdown.Item>Lawyers</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to='/admin/caseList'>
-                      <NavDropdown.Item>Cases</NavDropdown.Item>
-                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </>
-              ) : userInfo && userInfo.userType==="lawyer"? (
-                <>  < LinkContainer to='/cases'>
-                <Nav.Link>Cases</Nav.Link>
-              </LinkContainer>
-          <NavDropdown className='px-4' title={name}>
-            <LinkContainer to='/lawyerProfile'>
-              <NavDropdown.Item>Profile</NavDropdown.Item>
-            </LinkContainer>
-            <NavDropdown.Item onClick={logoutHandler}>
-              Logout
-            </NavDropdown.Item>
-          </NavDropdown></>
-             
-              ) : userInfo && userInfo.userType==="user"?( 
+              ) : userInfo && userInfo.userType === "lawyer" ? (
                 <>
-                < LinkContainer to='/cases'>
-                <Nav.Link>Cases</Nav.Link>
-              </LinkContainer>
-              <NavDropdown className='px-4' title={name}>
-                
-                <LinkContainer to='/profile'>
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+                  {" "}
+                  <LinkContainer to='/cases'>
+                    <Nav.Link>Cases</Nav.Link>
+                  </LinkContainer>
+                  <NavDropdown className='px-4' title={name}>
+                    <LinkContainer to='/lawyerProfile'>
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
                 </>
-            ):
-              (
+              ) : userInfo && userInfo.userType === "user" ? (
+                <>
+                  <LinkContainer to='/cases'>
+                    <Nav.Link>Cases</Nav.Link>
+                  </LinkContainer>
+                  <NavDropdown className='px-4' title={name}>
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
                 <NavDropdown className='px-4' title='LOGIN/SIGNUP'>
                   <LinkContainer to='/userLogin'>
                     <NavDropdown.Item>USER</NavDropdown.Item>

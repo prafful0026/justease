@@ -39,6 +39,7 @@ class App extends React.Component {
           <Route path='/admin/userList' component={UserListPage} exact/>
           <Route path='/admin/lawyerList' component={LawyerList} exact/>
           <Route path='/cases' component={CasesPage} exact/>
+          <Route path='/lawyers/search/:keyword' component={LawyersPage}/>
  
         </Container>
       </main>

@@ -50,8 +50,9 @@ const LawyerList = ({ history }) => {
               <th>liscence ID</th>
               <th>EMAIL</th>
               <th>Is verified?</th>
-              <th>Verify/Un-verify</th>
+              <th>Verify</th>
               <th>Delete</th>
+              
             </tr>
           </thead>
           <tbody>
