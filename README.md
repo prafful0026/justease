@@ -1,4 +1,3 @@
 
-AN FREELANCER PORTAL FOR LAWYERS
 
-DEPLOYED VERSION - https://justease.herokuapp.com/lawyers
+Deployed Version - https://justease.herokuapp.com/lawyers
